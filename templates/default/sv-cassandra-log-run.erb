@@ -1,0 +1,3 @@
+#!/bin/sh
+exec chpst -u <%= node[:cassandra][:log_owner] %> svlogd -tt ./main
+
