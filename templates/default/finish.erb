@@ -1,0 +1,9 @@
+#!/bin/sh
+
+if [ $1 -ne 0 ]
+then
+  echo "cassandra died, sleeping 1s..."
+  tail -n 25 log/main/current | mail <%= node[:cassandra][:crash_email] %> -s "cassandra (<%= node[:fqdn] %>) crashed, exit status $1"
+  sleep 1
+  exit $1
+fi
