@@ -1,0 +1,12 @@
+# for production, you should probably set the root to INFO
+# and the pattern to %c instead of %l.  (%l is slower.)
+
+log4j.appender.console.additionalFields={'version': '<%= node[:cassandra][:version]%>', 'application': 'cassandra'}
+log4j.appender.console.extractStacktrace=true
+log4j.appender.console.addExtendedInformation=true
+log4j.appender.console.originHost=<%= node[:hostname]%>
+log4j.appender.console=org.graylog2.log.GelfConsoleAppender
+log4j.appender.console.layout=org.apache.log4j.PatternLayout
+
+# output messages into a rolling log file as well as stdout
+log4j.rootLogger=INFO, console
