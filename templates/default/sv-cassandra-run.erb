@@ -1,27 +1,14 @@
 #!/bin/bash
 
-CASSANDRA_HOME=<%= node[:cassandra][:install_path] %>
-CASSANDRA_BIN=$CASSANDRA_HOME/build/classes
-CASSANDRA_BIN=$CASSANDRA_BIN:$CASSANDRA_HOME/build/classes/main
-CASSANDRA_BIN=$CASSANDRA_BIN:$CASSANDRA_HOME/build/classes/thrift
-CASSANDRA_CONF=${CASSANDRA_HOME}/conf
-
-# The java classpath (required)
-CLASSPATH=$CASSANDRA_CONF:$CASSANDRA_BIN:$CASSANDRA_HOME/lib/*
-# JNA path
-CLASSPATH=$CLASSPATH:/usr/share/java/*
-
 ulimit -n 65535
 ulimit -l unlimited
 #        -Xdebug \
 #        -Xrunjdwp:transport=dt_socket,server=y,address=8888,suspend=n \
 
-exec chpst -u <%= node[:cassandra][:owner] %> -e /etc/service/cassandra/env -o 65535 \
-  /usr/bin/java \
-        -cp ${CLASSPATH} \
-        -Xms<%= node[:cassandra][:min_memory] %> \
-        -Xmx<%= node[:cassandra][:max_memory] %> \
-    <% node[:cassandra][:jvm_options].each do |opt| -%>
-      <%= "#{opt} \\" %>
-    <% end %> 2>&1
+exec chpst -u <%= node[:cassandra][:owner] %> \
+  <% if @options[:has_env] -%>
+  -e /etc/service/cassandra/env \
+  <% end -%>
+  -o 65535 \
+  <%= node[:cassandra][:install_path] %>/bin/cassandra -f
 
