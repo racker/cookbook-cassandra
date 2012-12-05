@@ -27,13 +27,13 @@ default[:cassandra][:restart_on_config_change] = false
 default[:cassandra][:owner] = "daemon"
 default[:cassandra][:group] = "daemon"
 
-default[:cassandra][:log_owner] = "cassandralog"
-default[:cassandra][:log_group] = "cassandralog"
-
 default[:cassandra][:crash_email] = "root@localhost"
 
-default[:cassandra][:min_memory] = "2G"
-default[:cassandra][:max_memory] = "2G"
+# These are set automatically by cassandra-env
+# Only override if you know what you're doing
+# http://www.datastax.com/docs/1.0/configuration/environment_settings
+default[:cassandra][:heap_newsize] = nil
+default[:cassandra][:max_heap_size] = nil
 default[:cassandra][:replication] = "2"
 default[:cassandra][:partitioner] = "org.apache.cassandra.dht.RandomPartitioner"
 default[:cassandra][:authenticator] = "org.apache.cassandra.auth.AllowAllAuthenticator"
@@ -56,8 +56,6 @@ default[:cassandra][:log_path] = "/var/log/cassandra"
 default[:cassandra][:commit_log] = "/var/lib/cassandra/commitlog"
 default[:cassandra][:saved_caches] = "/var/lib/cassandra/saved_caches"
 default[:cassandra][:data_files] = ["/var/lib/cassandra/data"]
-
-default[:cassandra][:down] = false
 
 default[:cassandra][:jvm_options] = %w[
 -XX:+UseParNewGC
