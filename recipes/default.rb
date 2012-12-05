@@ -86,13 +86,16 @@ template "#{install_path}/conf/cassandra.yaml" do
 end
 
 runit_service "cassandra" do
-  log_owner node[:cassandra][:log_owner]
-  log_group node[:cassandra][:log_group]
-  down node[:cassandra][:down]
+  default_logger true
   run_restart node[:cassandra][:restart_on_config_change]
-  env({
-    :HOME => "/usr/sbin",
-    :PATH => "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:"
-  })
+  if node[:cassandra][:max_heap_size] && node[:cassandra][:heap_newsize]
+    options({
+      :has_env => true
+    })
+    env({
+      "MAX_HEAP_SIZE" => node[:cassandra][:max_heap_size],
+      "HEAP_NEWSIZE" => node[:cassandra][:heap_newsize]
+    })
+  end
 end
 
