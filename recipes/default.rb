@@ -71,7 +71,7 @@ template "#{install_path}/conf/cassandra.yaml" do
   owner service_user
   group service_group
   mode "644"
-  source "cassandra.yaml.erb"
+  source node[:cassandra][:version] >= "1.2.0" ? "cassandra_120.yaml.erb" : "cassandra.yaml.erb"
   variables(
     :cassandra_seed_nodes => node[:cassandra][:seed_nodes].join(",")
   )
