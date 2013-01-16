@@ -36,8 +36,6 @@ default[:cassandra][:heap_newsize] = nil
 default[:cassandra][:max_heap_size] = nil
 default[:cassandra][:replication] = "2"
 default[:cassandra][:partitioner] = "org.apache.cassandra.dht.RandomPartitioner"
-# new partitioner for >= 1.2.0
-default[:cassandra][:onetwenty][:partitioner] = "org.apache.cassandra.dht.Murmur3Partitioner"
 default[:cassandra][:authenticator] = "org.apache.cassandra.auth.AllowAllAuthenticator"
 default[:cassandra][:authority] = "org.apache.cassandra.auth.AllowAllAuthority"
 default[:cassandra][:endpoint_snitch] = "org.apache.cassandra.locator.SimpleSnitch"
@@ -79,4 +77,5 @@ default[:cassandra][:jvm_options] = %w[
 org.apache.cassandra.thrift.CassandraDaemon
 ]
 
-
+# set to true if using >= 1.2.0
+node[:cassandra][:onetwo] = false
