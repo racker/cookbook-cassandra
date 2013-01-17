@@ -67,11 +67,13 @@ cass_seed_nodes = node[:cassandra][:seed_nodes].delete_if do |ip|
   ip == node[:cassandra][:listen_ip]
 end.join(",")
 
+config_file = node[:cassandra][:onetwo] ? "cassandra_120.yaml.erb" : "cassandra.yaml.erb"
+
 template "#{install_path}/conf/cassandra.yaml" do
   owner service_user
   group service_group
   mode "644"
-  source node[:cassandra][:onetwo] ? "cassandra_120.yaml.erb" : "cassandra.yaml.erb"
+  source config_file
   variables(
     :cassandra_seed_nodes => node[:cassandra][:seed_nodes].join(",")
   )
