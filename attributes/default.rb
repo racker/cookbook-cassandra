@@ -77,4 +77,5 @@ default[:cassandra][:jvm_options] = %w[
 org.apache.cassandra.thrift.CassandraDaemon
 ]
 
-
+# set to true if using >= 1.2.0
+node[:cassandra][:onetwo] = false
