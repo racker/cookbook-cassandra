@@ -11,6 +11,6 @@ recipe           "cassandra::binary", "Installs Cassandra from a binary package"
 
 supports "ubuntu"
 
-%w{java required_attributes mailgun ark}.each do |cb|
+%w{java required_attributes mailgun python ark}.each do |cb|
   depends cb
 end
