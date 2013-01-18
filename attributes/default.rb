@@ -1,6 +1,7 @@
 
 default[:cassandra][:init_style] = "runit"
 default[:cassandra][:version] = nil # Required
+default[:cassandra][:config_template] = "cassandra.yaml.erb" # Required
 default[:cassandra][:onetwo] = nil # set to true if using version 1.2.x 
 
 default[:cassandra][:url] = nil # Required for binary recipe

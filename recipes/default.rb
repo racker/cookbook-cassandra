@@ -58,11 +58,6 @@ cookbook_file "#{install_path}/conf/log4j.properties" do
   source "log4j-server.properties"
 end
 
-config_file = "cassandra.yaml.erb"
-if node[:cassandra][:onetwo]
-  config_file = "cassandra.120.yaml.erb"
-end
-
 seed_nodes = node[:cassandra][:seed_nodes]
 seed_nodes.delete(node[:cassandra][:listen_ip])
 
@@ -70,7 +65,7 @@ template "#{install_path}/conf/cassandra.yaml" do
   owner service_user
   group service_group
   mode "644"
-  source config_file
+  source node[:cassandra][:config_template]
   variables(
     :cassandra_seed_nodes => seed_nodes.join(",")
   )
