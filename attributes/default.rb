@@ -52,6 +52,7 @@ default[:cassandra][:storage_port] = 7000
 default[:cassandra][:jmx_port] = 8080
 
 # Paths
+default[:cassandra][:prefix] = "/opt"
 default[:cassandra][:install_path] = "/opt/cassandra"
 default[:cassandra][:releases_path] = "/usr/src/cassandra"
 default[:cassandra][:log_path] = "/var/log/cassandra"
