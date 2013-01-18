@@ -1,6 +1,8 @@
 
 default[:cassandra][:init_style] = "runit"
 default[:cassandra][:version] = nil # Required
+default[:cassandra][:onetwo] = nil # set to true if using version 1.2.x 
+
 default[:cassandra][:url] = nil # Required for binary recipe
 default[:cassandra][:sha256] = nil # Required for binary recipe
 
@@ -76,5 +78,4 @@ default[:cassandra][:jvm_options] = %w[
 -Dcassandra.dynamic_snitch=cassandra.dynamic_snitch_enabled
 org.apache.cassandra.thrift.CassandraDaemon
 ]
-
 
