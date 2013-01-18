@@ -23,15 +23,10 @@ validate_required_attributes(:cassandra)
   package pkg
 end
 
-cass_version = node[:cassandra][:version]
 install_path = node[:cassandra][:install_path]
 releases_path = node[:cassandra][:releases_path]
 service_user = node[:cassandra][:owner]
 service_group = node[:cassandra][:group]
-
-cass_seed_nodes = node[:cassandra][:seed_nodes].map do |ip|
-  %Q{"#{ip}"}
-end.join(",")
 
 paths = [
   install_path,
@@ -63,17 +58,16 @@ cookbook_file "#{install_path}/conf/log4j.properties" do
   source "log4j-server.properties"
 end
 
-cass_seed_nodes = node[:cassandra][:seed_nodes].delete_if do |ip|
-  ip == node[:cassandra][:listen_ip]
-end.join(",")
+seed_nodes = node[:cassandra][:seed_nodes]
+seed_nodes.delete(node[:cassandra][:listen_ip])
 
 template "#{install_path}/conf/cassandra.yaml" do
   owner service_user
   group service_group
   mode "644"
-  source "cassandra.yaml.erb"
+  source node[:cassandra][:config_template]
   variables(
-    :cassandra_seed_nodes => node[:cassandra][:seed_nodes].join(",")
+    :cassandra_seed_nodes => seed_nodes.join(",")
   )
 
   if node[:cassandra][:restart_on_config_change]
