@@ -71,7 +71,7 @@ template "#{install_path}/conf/cassandra.yaml" do
   )
 
   if node[:cassandra][:restart_on_config_change]
-    notifies :restart, "service[cassandra]", :delayed
+    notifies :restart, "runit_service[cassandra]", :delayed
   end
 
   if node[:cassandra][:mailgun]
@@ -81,7 +81,6 @@ end
 
 runit_service "cassandra" do
   default_logger true
-  run_restart node[:cassandra][:restart_on_config_change]
   if node[:cassandra][:max_heap_size] && node[:cassandra][:heap_newsize]
     options({
       :has_env => true
