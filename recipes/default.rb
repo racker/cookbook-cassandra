@@ -7,6 +7,7 @@
 # All rights reserved - Do Not Redistribute
 #
 include_recipe "java"
+include_recipe "runit"
 
 if node[:cassandra][:mailgun]
   include_recipe "mailgun"
