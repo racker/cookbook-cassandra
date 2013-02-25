@@ -1,6 +1,6 @@
 include_recipe "ark"
 
-node[:cassandra][:required_attributes] |= [
+node.normal[:cassandra][:required_attributes] |= [
   :url,
   :sha256
 ]

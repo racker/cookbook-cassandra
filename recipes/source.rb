@@ -10,7 +10,7 @@
 cass_version = node[:cassandra][:version]
 install_path = node[:cassandra][:install_path]
 
-node[:cassandra][:required_attributes] |= [
+node.normal[:cassandra][:required_attributes] |= [
   :source_url,
   :source_reference
 ]
