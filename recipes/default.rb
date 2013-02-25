@@ -80,6 +80,16 @@ template "#{install_path}/conf/cassandra.yaml" do
   end
 end
 
+%w[
+  jna.jar
+  jna-platform.jar
+].each do |jar|
+  link File.join(install_path, "lib", jar) do
+    to "/usr/share/java/#{jar}"
+    only_if { File.exists?("/usr/share/java/#{jar}") }
+  end
+end
+
 runit_service "cassandra" do
   default_logger true
   if node[:cassandra][:max_heap_size] && node[:cassandra][:heap_newsize]
