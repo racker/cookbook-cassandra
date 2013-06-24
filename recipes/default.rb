@@ -59,7 +59,7 @@ cookbook_file "#{install_path}/conf/log4j.properties" do
   source "log4j-server.properties"
 end
 
-seed_nodes = node[:cassandra][:seed_nodes]
+seed_nodes = node.default[:cassandra][:seed_nodes]
 seed_nodes.delete(node[:cassandra][:listen_ip])
 
 template "#{install_path}/conf/cassandra.yaml" do
