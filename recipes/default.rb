@@ -9,15 +9,6 @@
 include_recipe "java"
 include_recipe "runit"
 
-if node[:cassandra][:mailgun]
-  include_recipe "mailgun"
-  mailgun "cassandra_config_change" do
-    subject "Cassandra config changed on #{node[:fqdn]}"
-    body "Cassandra config changed at #{Time.now} on #{node[:fqdn]} and requires a restart"
-    action :nothing
-  end
-end
-
 validate_required_attributes(:cassandra)
 
 %w{libjna-java ant}.each do |pkg|
@@ -72,10 +63,6 @@ template "#{install_path}/conf/cassandra.yaml" do
 
   if node[:cassandra][:restart_on_config_change]
     notifies :restart, "runit_service[cassandra]", :delayed
-  end
-
-  if node[:cassandra][:mailgun]
-    notifies :create, "mailgun[cassandra_config_change]", :delayed
   end
 end
 

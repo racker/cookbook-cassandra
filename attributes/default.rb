@@ -24,7 +24,6 @@ default[:cassandra][:required_attributes] = [
   :initial_token
 ]
 
-default[:cassandra][:mailgun] = false
 default[:cassandra][:restart_on_config_change] = false
 
 default[:cassandra][:owner] = "daemon"
