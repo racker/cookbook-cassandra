@@ -46,6 +46,11 @@ default[:cassandra][:dynamic_snitch] = "true"
 default[:cassandra][:commitlog_sync] = "periodic"
 default[:cassandra][:commitlog_sync_period] = 10000
 default[:cassandra][:seed_nodes] = []
+default[:cassandra][:read_request_timeout_in_ms] = 10000
+default[:cassandra][:range_request_timeout_in_ms] = 10000
+default[:cassandra][:write_request_timeout_in_ms] = 10000
+default[:cassandra][:truncate_request_timeout_in_ms] = 60000
+default[:cassandra][:request_timeout_in_ms] = 10000
 
 # Ports
 default[:cassandra][:rpc_port] = 9160
