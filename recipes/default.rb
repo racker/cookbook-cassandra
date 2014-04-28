@@ -46,6 +46,13 @@ paths.each do |path|
   end
 end
 
+template "/etc/profile.d/cassandra.sh" do
+  source "profile_path.sh.erb"
+  owner "root"
+  group "root"
+  mode "0755"
+end
+
 directory "#{install_path}/conf" do
   owner service_user
   group service_group
