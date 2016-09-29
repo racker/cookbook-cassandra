@@ -10,12 +10,6 @@
 cass_version = node[:cassandra][:version]
 install_path = node[:cassandra][:install_path]
 
-node.normal[:cassandra][:required_attributes] |= [
-  :source_url,
-  :source_reference
-]
-validate_required_attributes(:cassandra)
-
 execute "ant_build" do
   command "ant"
   cwd "#{install_path}"
