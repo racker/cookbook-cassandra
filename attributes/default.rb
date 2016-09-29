@@ -2,7 +2,7 @@
 default[:cassandra][:init_style] = "runit"
 default[:cassandra][:version] = nil # Required
 default[:cassandra][:config_template] = "cassandra.yaml.erb" # Required
-default[:cassandra][:onetwo] = nil # set to true if using version 1.2.x 
+default[:cassandra][:onetwo] = nil # set to true if using version 1.2.x
 
 default[:cassandra][:url] = nil # Required for binary recipe
 default[:cassandra][:sha256] = nil # Required for binary recipe
@@ -15,14 +15,6 @@ default[:cassandra][:cql][:base_url] = nil # Required for cql recipe
 
 default[:cassandra][:cluster_name] = nil # Required for default recipe
 default[:cassandra][:initial_token] = nil # Required for default recipe
-
-# Specific recipes add to this array since attributes
-# are only required for specific recipes
-default[:cassandra][:required_attributes] = [
-  :version,
-  :cluster_name,
-  :initial_token
-]
 
 default[:cassandra][:mailgun] = false
 default[:cassandra][:restart_on_config_change] = false

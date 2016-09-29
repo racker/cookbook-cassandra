@@ -18,8 +18,6 @@ if node[:cassandra][:mailgun]
   end
 end
 
-validate_required_attributes(:cassandra)
-
 %w{libjna-java ant}.each do |pkg|
   package pkg
 end
