@@ -1,3 +1,4 @@
+name             "cassandra"
 maintainer       "Rackspace"
 maintainer_email "cooks@lists.rackspace.com"
 license          "All rights reserved"
