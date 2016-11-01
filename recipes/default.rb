@@ -8,6 +8,7 @@
 #
 include_recipe "java"
 include_recipe "runit"
+include_recipe "cassandra::jdk7fix"
 
 if node[:cassandra][:mailgun]
   include_recipe "mailgun"
